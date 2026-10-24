@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Şişli Mutfak — Haftalık Yemek Planı</title>
+<style>
+  /* ==========================================================================
+     APPLE DESIGN.MD — EDITORIAL MINIMALISM & RESTRAINT AS LUXURY
+     ========================================================================== */
+  :root {
+    --bg-primary: #f5f5f7;
+    --bg-elevated: #ffffff;
+    --surface-dark: #272729;
+    --surface-dark-alt: #2a2a2c;
+    --glass-nav: rgba(0, 0, 0, 0.92);
+    --glass-sticky: rgba(245, 245, 247, 0.80);
+
+    --text-primary: #1d1d1f;
+    --text-secondary: rgba(0, 0, 0, 0.56);
+    --text-tertiary: rgba(0, 0, 0, 0.48);
+    --text-on-dark: #ffffff;
+    --text-on-dark-secondary: rgba(255, 255, 255, 0.72);
+
+    --accent-primary: #0066cc;
+    --accent-focus: #0071e3;
+    --accent-bright-dark: #2997ff;
+
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-chip: #e0e0e0;
+    --border-dark-subtle: rgba(255, 255, 255, 0.14);
+
+    --shadow-product: 3px 5px 30px 0 rgba(0, 0, 0, 0.22);
+
+    --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-mono: 'SF Mono', ui-monospace, Menlo, Monaco, monospace;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-text);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -0.374px;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  /* ==========================================================================
+     TYPOGRAPHY LADDER (Weights strictly 300 / 400 / 600 / 700 — NEVER 500)
+     ========================================================================== */
+  .typo-hero-display {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 600;
+    line-height: 1.07;
+    letter-spacing: -0.28px;
+  }
+
+  .typo-display-lg {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.8vw, 40px);
+    font-weight: 600;
+    line-height: 1.10;
+    letter-spacing: 0px;
+  }
+
+  .typo-lead {
+    font-family: var(--font-display);
+    font-size: clamp(19px, 2.2vw, 24px);
+    font-weight: 400;
+    line-height: 1.24;
+    letter-spacing: 0.196px;
+  }
+
+  .typo-heading-md {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.19;
+    letter-spacing: 0.231px;
+  }
+
+  .typo-body {
+    font-family: var(--font-text);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -0.374px;
+  }
+
+  .typo-card-title {
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.29;
+    letter-spacing: -0.224px;
+  }
+
+  .typo-caption {
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.33;
+    letter-spacing: -0.12px;
+  }
+
+  /* ==========================================================================
+     GLOBAL NAV (48px) & STICKY PRODUCT BAR (52px)
+     ========================================================================== */
+  .comp-global-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 48px;
+    background: var(--glass-nav);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    padding: 0 24px;
+  }
+
+  .global-nav-inner {
+    max-width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .global-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .global-nav-links a, .global-nav-action {
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.12px;
+    transition: color 0.18s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-text);
+  }
+
+  .global-nav-links a:hover, .global-nav-action:hover {
+    color: #ffffff;
+  }
+
+  .comp-sticky-product-bar {
+    position: sticky;
+    top: 48px;
+    z-index: 990;
+    height: 52px;
+    background: var(--glass-sticky);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 0 24px;
+  }
+
+  .sticky-product-inner {
+    max-width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .sticky-bar-status {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .sticky-bar-status strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-family: var(--font-mono);
+  }
+
+  /* ==========================================================================
+     FULL-BLEED PRODUCT TILES (0px radius, 80px vertical padding)
+     ========================================================================== */
+  .comp-product-tile-light {
+    width: 100%;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    border-radius: 0px;
+    padding: 80px 24px;
+  }
+
+  .comp-product-tile-dark {
+    width: 100%;
+    background: var(--surface-dark);
+    color: var(--text-on-dark);
+    border-radius: 0px;
+    padding: 80px 24px;
+  }
+
+  .comp-product-tile-parchment {
+    width: 100%;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 0px;
+    padding: 80px 24px;
+  }
+
+  .tile-container {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .tile-header-centered {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .tile-eyebrow {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.33;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 8px;
+  }
+
+  .comp-product-tile-dark .tile-eyebrow {
+    color: var(--accent-bright-dark);
+  }
+
+  /* ==========================================================================
+     BUTTONS & CONFIGURATOR CHIPS
+     ========================================================================== */
+  .cta-cluster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+
+  .comp-button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--accent-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 9999px;
+    padding: 11px 22px;
+    font-family: var(--font-text);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.374px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.16s ease, background-color 0.16s ease;
+  }
+
+  .comp-button-primary:hover {
+    background: var(--accent-focus);
+  }
+
+  .comp-button-primary:active {
+    transform: scale(0.95);
+  }
+
+  .comp-button-secondary-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+    border-radius: 9999px;
+    padding: 10px 21px;
+    font-family: var(--font-text);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.374px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.16s ease, background-color 0.16s ease;
+  }
+
+  .comp-button-secondary-pill:hover {
+    background: rgba(0, 102, 204, 0.06);
+  }
+
+  .comp-button-secondary-pill:active {
+    transform: scale(0.95);
+  }
+
+  .comp-product-tile-dark .comp-button-secondary-pill {
+    color: var(--accent-bright-dark);
+    border-color: var(--accent-bright-dark);
+  }
+
+  .comp-product-tile-dark .comp-button-secondary-pill:hover {
+    background: rgba(41, 151, 255, 0.12);
+  }
+
+  .comp-configurator-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+  }
+
+  .comp-configurator-chip {
+    background: #ffffff;
+    color: var(--text-primary);
+    border: 1px solid var(--border-chip);
+    border-radius: 9999px;
+    padding: 11px 18px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: -0.224px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+
+  .comp-configurator-chip:hover {
+    border-color: rgba(0, 0, 0, 0.36);
+  }
+
+  .comp-configurator-chip:active {
+    transform: scale(0.95);
+  }
+
+  .comp-configurator-chip.selected {
+    background: #ffffff;
+    color: var(--text-primary);
+    border: 2px solid var(--accent-focus);
+    padding: 10px 17px;
+    font-weight: 600;
+  }
+
+  .chip-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  .comp-configurator-chip.done .chip-dot {
+    background: #28cd41;
+  }
+
+  /* ==========================================================================
+     SINGLE PRODUCT VIDEO STAGE & MINIMALIST SPEC STRIP
+     ========================================================================== */
+  .meal-video-stage {
+    max-width: 840px;
+    margin: 44px auto 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000000;
+    box-shadow: var(--shadow-product);
+  }
+
+  .meal-video-stage video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    object-fit: cover;
+    background: #000000;
+  }
+
+  .meal-spec-grid {
+    max-width: 840px;
+    margin: 48px auto 0;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 48px;
+    text-align: left;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .comp-product-tile-dark .meal-spec-grid {
+    border-top-color: var(--border-dark-subtle);
+  }
+
+  .spec-col-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .comp-product-tile-dark .spec-col-title {
+    color: var(--text-on-dark-secondary);
+  }
+
+  .ing-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    cursor: pointer;
+    font-size: 17px;
+    line-height: 1.47;
+    letter-spacing: -0.374px;
+  }
+
+  .ing-item input[type="checkbox"] {
+    margin-top: 5px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ing-item.checked span {
+    text-decoration: line-through;
+    opacity: 0.48;
+  }
+
+  .step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 17px;
+    line-height: 1.47;
+    letter-spacing: -0.374px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .comp-product-tile-dark .step-item {
+    border-bottom-color: var(--border-dark-subtle);
+  }
+
+  .step-item:last-child {
+    border-bottom: none;
+  }
+
+  .step-index {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-primary);
+    padding-top: 4px;
+    min-width: 20px;
+  }
+
+  .comp-product-tile-dark .step-index {
+    color: var(--accent-bright-dark);
+  }
+
+  .step-item.done {
+    opacity: 0.45;
+    text-decoration: line-through;
+  }
+
+  .prep-strip {
+    max-width: 840px;
+    margin: 32px auto 0;
+    padding: 18px 24px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-on-dark-secondary);
+    font-size: 14px;
+    line-height: 1.43;
+    text-align: left;
+  }
+
+  .prep-strip strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* ==========================================================================
+     UNIFIED UTILITY SWITCHER (500 TL Market · Mutfak Bölgeleri · 84 Envanter)
+     ========================================================================== */
+  .utility-panel {
+    max-width: 840px;
+    margin: 44px auto 0;
+  }
+
+  .market-list {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .market-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    cursor: pointer;
+  }
+
+  .market-row.bought {
+    opacity: 0.48;
+  }
+
+  .market-row.bought .market-title {
+    text-decoration: line-through;
+  }
+
+  .market-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .market-left input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--accent-primary);
+  }
+
+  .market-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .market-sub {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .market-price {
+    font-family: var(--font-mono);
+    font-size: 17px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .zone-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .zone-tile {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.16s ease;
+  }
+
+  .zone-tile:active {
+    transform: scale(0.98);
+  }
+
+  .zone-tile img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .zone-tile-body {
+    padding: 16px;
+  }
+
+  .pantry-toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .apple-search {
+    flex: 1;
+    min-width: 240px;
+    padding: 11px 16px;
+    border-radius: 9999px;
+    border: 1px solid var(--border-chip);
+    font-family: var(--font-text);
+    font-size: 14px;
+    outline: none;
+  }
+
+  .apple-search:focus {
+    border-color: var(--accent-focus);
+  }
+
+  .pantry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .pantry-item {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pantry-item img {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  /* ==========================================================================
+     MINIMAL APPLE FOOTNOTE FOOTER
+     ========================================================================== */
+  .comp-footer {
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-subtle);
+    padding: 32px 24px;
+    color: var(--text-tertiary);
+    font-size: 12px;
+  }
+
+  .footer-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .comp-product-tile-light,
+    .comp-product-tile-dark,
+    .comp-product-tile-parchment {
+      padding: 48px 16px;
+    }
+    .meal-spec-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .zone-grid {
+      grid-template-columns: 1fr;
+    }
+    .global-nav-links li:not(:first-child):not(:last-child) {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. GLOBAL NAV (48px, #000000) -->
+<header class="comp-global-nav">
+  <div class="global-nav-inner">
+    <ul class="global-nav-links">
+      <li><a href="#top" aria-label="Apple"></a></li>
+      <li><a href="#ogun-1">1. Öğün (Brunch)</a></li>
+      <li><a href="#ogun-2">2. Öğün (Akşam)</a></li>
+      <li><a href="#envanter-merkezi">Market & Kiler</a></li>
+      <li><a href="haftalik_yemek_ve_tarif_kitabi.pdf" target="_blank">Tarif Kitabı PDF</a></li>
+    </ul>
+    <button class="global-nav-action" onclick="resetAllProgress()">Sıfırla</button>
+  </div>
+</header>
+
+<!-- 2. STICKY PRODUCT BAR (52px, Frosted Glass) -->
+<nav class="comp-sticky-product-bar">
+  <div class="sticky-product-inner">
+    <span class="typo-heading-md">Şişli Mutfak</span>
+    <div class="sticky-bar-status">
+      <span>Öğün <strong id="topMealStat">0/14</strong></span>
+      <span>Bütçe <strong id="topBudgetStat">0 / 500 TL</strong></span>
+      <span id="timerDisplay" style="color:var(--accent-primary); font-weight:600; font-family:var(--font-mono);"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- 3. HERO TILE (#ffffff) — Day Selector & Headline -->
+<section class="comp-product-tile-light" id="top">
+  <div class="tile-container">
+    <div class="tile-header-centered">
+      <span class="tile-eyebrow">2 KİŞİ · 14 ÖĞÜN · 500 TL BÜTÇE</span>
+      <h1 class="typo-hero-display">Haftalık Mutfak.</h1>
+      <p class="typo-lead" style="color:var(--text-secondary); margin-top:12px;">
+        Evdeki 84 kiler ürünü ve 500 TL taze market alımıyla 7 günlük videolu yemek planı.
+      </p>
+    </div>
+    <div class="comp-configurator-row" id="dayChipRow"></div>
+  </div>
+</section>
+
+<!-- 4. ÖĞÜN 1 TILE (#f5f5f7 Parchment) & ÖĞÜN 2 TILE (#272729 Dark Carbon) -->
+<main id="dayMealsRoot"></main>
+
+<!-- 5. UNIFIED UTILITY TILE (#ffffff) — 1 Active Tab at a Time -->
+<section class="comp-product-tile-light" id="envanter-merkezi">
+  <div class="tile-container">
+    <div class="tile-header-centered">
+      <span class="tile-eyebrow">MUTFAK SİSTEMİ</span>
+      <h2 class="typo-display-lg">Market, Dolaplar ve Kiler.</h2>
+    </div>
+
+    <div class="comp-configurator-row">
+      <button class="comp-configurator-chip selected" id="tabBtn-market" onclick="setUtilityTab('market')">500 TL Market Listesi</button>
+      <button class="comp-configurator-chip" id="tabBtn-zones" onclick="setUtilityTab('zones')">Mutfak Bölgeleri (Z01–Z09)</button>
+      <button class="comp-configurator-chip" id="tabBtn-pantry" onclick="setUtilityTab('pantry')">84 Kiler Ürünü</button>
+    </div>
+
+    <div class="utility-panel" id="utilityPanelRoot"></div>
+  </div>
+</section>
+
+<!-- 6. MINIMAL FOOTNOTE -->
+<footer class="comp-footer">
+  <div class="footer-inner">
+    <span>Şişli Mutfak · 84 Kiler Ürünü · 14 Flux-3-Max 720p Video · 500 TL Market Optimizasyonu</span>
+    <a href="haftalik_yemek_ve_tarif_kitabi.pdf" target="_blank" style="color:var(--accent-primary); text-decoration:none;">8 Sayfa A4 PDF İndir</a>
+  </div>
+</footer>
+
+<script>
+const DATA = {"days": [{"day": 1, "day_title": "PAZARTESİ — EV ERİŞTESİ MANTISI & SÜZME MERCİMEK ÇORBASI", "prep_alert": "AKŞAM ÖN HAZIRLIK: 2 su bardağı Kuru Nohut (U050) ve 1.5 su bardağı Kuru Fasulyeyi (U053) ayrı derin kaplarda bol ılık suya ıslat. Marketten alınan 1.2 kg tavuk butu 2.5 litre suda haşla; etlerini didikleyip 3 öğünlük ayır, 2 litre tavuk suyunu kavanozla buzdolabına kaldır.", "meal1": {"name": "Mısır Unlu & Peynirli Tava Kuymak Ekmeği + Haşlanmış Yumurta Kahvaltısı", "prep": "5 dk", "cook": "12 dk", "zone": "Z04 Üst Raf & Z08 Üst Raf", "pantry": ["1 su bardağı Piyale Mısır Unu (U055 - Z04 Üst Raf)", "2 yemek kaşığı Buğday Unu (U057 - Z04 Üst Raf)", "1 çay kaşığı Harras Karbonat (U012) ve Kaya Tuzu (U017)", "3 yemek kaşığı Ayçiçek Yağı (U032) + 1 çay kaşığı Çörek Otu (U021)", "Servis için: Siyah Zeytin (U040) ve Süzme Bal (U033)"], "fresh": ["3 yemek kaşığı Tam Yağlı Yoğurt + 1/2 su bardağı ılık su", "100 g Kahvaltılık Lor / Beyaz Peynir (ufalanmış)", "4 adet Yumurta (1 tanesi hamura, 3 tanesi kayısı haşlama)"], "steps": ["Geniş kasede 1 yumurta, 3 kaşık yoğurt, yarım bardak su ve 2 kaşık sıvı yağı çırp.", "Mısır unu (U055), buğday unu (U057), karbonat, tuz ve ufalanmış peyniri ekleyip koyu kek kıvamında karıştır.", "Yapışmaz tavayı 1 kaşık yağla ısıtıp harcı yay, üzerine çörek otu (U021) serp. Kısık ateşte altı kızarana dek 6 dk, çevirip 5 dk daha pişir.", "Yanında 6 dakika kayısı kıvamında haşlanmış 3 yumurta, zeytin (U040) ve süzme balla (U033) sıcak servis et."], "video_id": "G01_Ogun1_Misir_Unlu_Kuymak_Ekmegi", "video_file": "yemek_videolari/G01_Ogun1_Misir_Unlu_Kuymak_Ekmegi.mp4", "poster_file": "yemek_videolari/posters/G01_Ogun1_Misir_Unlu_Kuymak_Ekmegi.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2eb/-DRFFNk53Cg7EWPRnXA7X_alligator.mp4"}, "meal2": {"name": "Süzme Kırmızı Mercimek Çorbası + Sarımsaklı Yoğurtlu Ev Eriştesi Mantısı", "prep": "10 dk", "cook": "25 dk", "zone": "Z04 Alt/Üst Raf", "pantry": ["Çorba: 1 su bardağı Kırmızı Mercimek (U052), 1 yemek kaşığı Un (U057), 1 çay kaşığı Kimyon (U027)", "Ana Yemek: 2.5 su bardağı Ev Yapımı Kesme Erişte (U065 - Z04 Alt Raf)", "Üzeri İçin: 1 tatlı kaşığı Salça (U041), Kuru Nane (U018), Tatlı Toz Biber (U006), 4 yemek kaşığı Sıvı Yağ (U032)"], "fresh": ["Çorba: 1 adet Kuru Soğan, 1 adet küçük Patates (küp doğranmış)", "Mantı Sosu: 1.5 su bardağı Kova Yoğurt + 2 diş ezilmiş Sarımsak"], "steps": ["Tencerede doğranmış soğan ve patatesi 2 kaşık yağda 3 dk çevir, 1 kaşık unu (U057) ekleyip kokusu çıkana kadar kavur.", "Yıkanmış kırmızı mercimeği (U052) ve 5 su bardağı sıcak suyu ekle. 20 dk yumuşayana dek kaynatıp El Blenderı (U075) ile pürüzsüz çek; kimyon ve tuz ekle.", "Ayrı tencerede tuzlu kaynar suda ev eriştesini (U065) 8-9 dk haşlayıp süz.", "Erişteleri iki derin tabağa al, üzerine sarımsaklı yoğurdu gezdir. Küçük tavada yağ, salça (U041), kuru nane (U018) ve toz biberi (U006) kızdırıp yoğurdun üzerine dök."], "video_id": "G01_Ogun2_Mercimek_Corbasi_ve_Eriste_Mantisi", "video_file": "yemek_videolari/G01_Ogun2_Mercimek_Corbasi_ve_Eriste_Mantisi.mp4", "poster_file": "yemek_videolari/posters/G01_Ogun2_Mercimek_Corbasi_ve_Eriste_Mantisi.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2eb/evQRuUJsA8VgmhxxFAM0B_alligator.mp4"}}, {"day": 2, "day_title": "SALI — ÖZBEK HARÇLI TAVUKLU BASMATİ PİLAVI & ÇILBIR", "prep_alert": "GÜNLÜK ÖN HAZIRLIK: Dün akşam ıslattığın Nohut (U050) ve Kuru Fasulyeyi (U053) haşla. Haşlanan nohudun yarısını bu akşamki Özbek pilavına ayır, kalan yarısını 6. ve 7. gün için buzdolabına kaldır.", "meal1": {"name": "Sarımsaklı Yoğurtlu Poşe Çılbır + Ev Yapımı Susamlı Sıcak Tava Bazlaması", "prep": "10 dk", "cook": "12 dk", "zone": "Z04 Üst Raf", "pantry": ["Bazlama: 1.5 su bardağı Un (U057), 1 çay kaşığı Karbonat (U012), Tuz (U017)", "Üzeri: 1 tatlı kaşığı Susam (U019) + Çörek Otu (U021)", "Çılbır Yağı: 2 yemek kaşığı Sıvı Yağ (U032) + 1 tatlı kaşığı Öz Gurme Pul Biber (U009)"], "fresh": ["Bazlama Hamuru: 4 yemek kaşığı Yoğurt + 2 yemek kaşığı su", "Çılbır: 4 adet Yumurta + 1 su bardağı Yoğurt + 1 diş Sarımsak"], "steps": ["Un (U057), karbonat, tuz ve yoğurdu yoğurup 4 bezeye ayır. Üzerine susam (U019) ve çörek otu bastırarak tabak büyüklüğünde aç.", "Yağsız kızgın tavada bazlamaları iki yüzü balon gibi kabarıp beneklenene kadar 3'er dakika pişir.", "Küçük tencerede 3 parmak suyu kaynatıp altını kıs; yumurtaları tek tek kırıp 3 dakika beyazı saracak şekilde poşe haşla.", "Tabağa sarımsaklı yoğurt yay, delikli kepçeyle aldığın yumurtaları oturt ve kızgın pul biberli (U009) yağı gezdirip sıcak bazlamayla sun."], "video_id": "G02_Ogun1_Susamli_Bazlama_ve_Cilbir", "video_file": "yemek_videolari/G02_Ogun1_Susamli_Bazlama_ve_Cilbir.mp4", "poster_file": "yemek_videolari/posters/G02_Ogun1_Susamli_Bazlama_ve_Cilbir.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2eb/hOpj0A-4I0bpCuOdotnuc_alligator.mp4"}, "meal2": {"name": "Ziravor Özbek Baharatlı, Tavuklu ve Nohutlu Basmati Pilavı + Cacık", "prep": "10 dk", "cook": "22 dk", "zone": "Z09 Tepe & 1. Kat", "pantry": ["1.5 su bardağı Reis Basmati Pirinç (U059 - Z09 Mor Kutu)", "1.5 yemek kaşığı Ziravor Özbek Pilavı Baharat Karışımı (U011 - Z09 1. Kat)", "1 su bardağı Haşlanmış Nohut (U050) + 4 yemek kaşığı Ayçiçek Yağı (U032)"], "fresh": ["1 büyük Kuru Soğan (piyazlık doğranmış)", "1 kase Didiklenmiş Haşlanmış Tavuk But Eti + 2.5 su bardağı Sıcak Tavuk Suyu", "Cacık: 1 su bardağı Yoğurt + Kuru Nane (U018) + 1 diş Sarımsak"], "steps": ["Basmati pirinci (U059) nişastası gidene kadar soğuk suda 3 kez yıka ve süz.", "Pilav tenceresinde piyazlık soğanları karamel rengi alana dek 6 dk kavur; didiklenmiş tavuk etlerini ve haşlanmış nohutları (U050) ekle.", "Üzerine Ziravor Özbek Pilavı Harcını (U011) ve yıkanmış pirinci yayıp karıştırmadan 2.5 bardak sıcak tavuk suyunu dök.", "Kısık ateşte suyunu çekene kadar 14 dk pişir, 10 dk demlendirip naneli yoğurt cacıkla servis et."], "video_id": "G02_Ogun2_Ozbek_Harcli_Tavuklu_Basmati_Pilavi", "video_file": "yemek_videolari/G02_Ogun2_Ozbek_Harcli_Tavuklu_Basmati_Pilavi.mp4", "poster_file": "yemek_videolari/posters/G02_Ogun2_Ozbek_Harcli_Tavuklu_Basmati_Pilavi.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ec/oVzoG6aohU4412ujFutbq_alligator.mp4"}}, {"day": 3, "day_title": "ÇARŞAMBA — GELENEKSEL KURU FASULYE & BALDO PİRİNÇ PİLAVI", "prep_alert": "GÜNLÜK NOT: Dün haşlanan Kuru Fasulyeler (U053) hazır olduğu için akşam yemeği 20 dakikada tamamlanır. Birleştirilen iki açık Baldo pirinç paketini (U060+U061) bu akşam kullanıyoruz.", "meal1": {"name": "Elmalı, Tarçınlı ve Keten Tohumlu Yulaf Kasesi + 3 Yumurtalı Peynirli Omlet", "prep": "5 dk", "cook": "8 dk", "zone": "Z08 Üst Raf & Z07", "pantry": ["1 su bardağı Sade Organik Yulaf Ezmesi (U063 - Z08 Üst Raf)", "2 yemek kaşığı TamTarım Keten Tohumu (U064 - Z08 Üst Raf)", "1 çay kaşığı Bağdat Tarçın (U005) + 2 yemek kaşığı Süzme Bal (U033)", "Tezgah Üstündeki 1 adet Elma (Z07 - küp doğranmış)"], "fresh": ["1.5 su bardağı Yoğurt (yulaf kasesi için)", "Omlet: 3 adet Yumurta + 80 g Beyaz/Lor Peynir"], "steps": ["Küçük tavada küp doğranmış elmayı (Z07) ve tarçını (U005) 3 dakika hafifçe yumuşayana dek çevir.", "İki kaseye yoğurt, organik yulaf ezmesi (U063) ve keten tohumunu (U064) paylaştır; üzerine ılık tarçınlı elma ve süzme bal (U033) gezdir.", "Yanında tuzlu-proteinsiz kalmamak için 3 yumurta ve peyniri çırpıp 1 kaşık yağda 4 dakikada puf omlet pişir."], "video_id": "G03_Ogun1_Elmali_Tarcinli_Yulaf_ve_Peynirli_Omlet", "video_file": "yemek_videolari/G03_Ogun1_Elmali_Tarcinli_Yulaf_ve_Peynirli_Omlet.mp4", "poster_file": "yemek_videolari/posters/G03_Ogun1_Elmali_Tarcinli_Yulaf_ve_Peynirli_Omlet.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ec/ZbrYT5xPauSZe3jjjhgbf_alligator.mp4"}, "meal2": {"name": "Salçalı Kuru Fasulye Yemeği + Arpa Şehriyeli Gönen Baldo Pirinç Pilavı", "prep": "8 dk", "cook": "25 dk", "zone": "Z04 Üst Raf", "pantry": ["2.5 su bardağı Haşlanmış Kuru Fasulye (U053 - Z04 Üst Raf)", "1.5 yemek kaşığı Salça / Sos (U041) + 1 çay kaşığı Pul Biber (U009) ve Kimyon (U027)", "Pilav: 1.5 su bardağı Gönen Baldo Pirinç (U060+U061) + 3 yemek kaşığı Arpa Şehriye (U056)"], "fresh": ["1 büyük Kuru Soğan + 1 adet Yeşil Biber / Domates (doğranmış)", "Pilav için 1 su bardağı Tavuk Suyu + 1.5 su bardağı sıcak su"], "steps": ["Tencerede yemeklik doğranmış soğan ve biberi 3 kaşık yağda yumuşat, salçayı (U041) ekleyip 2 dk kavur.", "Haşlanmış kuru fasulyeyi (U053), kimyonu (U027) ve üzerini 2 parmak geçecek kadar sıcak suyu ekleyip kısık ateşte 20 dk özleşene kadar kaynat.", "Pilav tenceresinde arpa şehriyeyi (U056) 3 kaşık yağda altın rengi olana dek kavur, yıkanmış Baldo pirinci (U060) ekleyip 3 dk çevir.", "Tavuk suyu ve sıcak suyu ekleyip kısık ateşte 12 dk pişir; kağıt havlu altında demlendirip fasulyeyle servis et."], "video_id": "G03_Ogun2_Kuru_Fasulye_ve_Sehriyeli_Baldo_Pilav", "video_file": "yemek_videolari/G03_Ogun2_Kuru_Fasulye_ve_Sehriyeli_Baldo_Pilav.mp4", "poster_file": "yemek_videolari/posters/G03_Ogun2_Kuru_Fasulye_ve_Sehriyeli_Baldo_Pilav.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ec/6jLkGxSjjCagUwiCkBMSl_alligator.mp4"}}, {"day": 4, "day_title": "PERŞEMBE — MERCİMEK KÖFTESİ ŞÖLENİ & İSPANYOL OMLETİ", "prep_alert": "GÜNLÜK NOT: Bugün fırın veya uzun tencere yemeği yok; evdeki Kırmızı Mercimek (U052) ve İnce Bulgur (U051) ile 6 kişilik tepsi dolusu Mercimek Köftesi çıkıyor (kalanı ertesi güne atıştırmalık olur).", "meal1": {"name": "Patatesli ve Dağ Kekikli İspanyol Omleti (Tortilla) + Keçiboynuzu Özü", "prep": "8 dk", "cook": "15 dk", "zone": "Z04 & Z08", "pantry": ["1 tatlı kaşığı İri Yapraklı Dağ Kekiği (U022) + Karabiber Değirmeni (U026)", "4 yemek kaşığı Ayçiçek Yağı (U032) + Kaya Tuzu (U017)", "Yanında: Siyah Zeytin (U040) ve Hünnap Keçiboynuzu Özü (U037 - Z08 Üst Raf)"], "fresh": ["2 adet orta boy Patates (ince küp doğranmış)", "1 adet küçük Kuru Soğan (ince piyazlık) + 4 adet Yumurta"], "steps": ["Tavada 4 kaşık yağı ısıtıp ince doğranmış patates ve soğanları kapağı kapalı olarak kısık-orta ateşte 10 dk yumuşayıp kızarana dek pişir.", "Çukur kasede 4 yumurtayı tuz, karabiber ve dağ kekiği (U022) ile çırp.", "Pişen sıcak patates-soğan karışımını tavada düzleştirip yumurtayı üzerine dök; kısık ateşte altını 3 dk, tabakla ters çevirip diğer yüzünü 2 dk pişir.", "Dilimleyerek zeytin (U040) ve keçiboynuzu özü (U037) ile servis et."], "video_id": "G04_Ogun1_Patatesli_Dag_Kekikli_Ispanyol_Omleti", "video_file": "yemek_videolari/G04_Ogun1_Patatesli_Dag_Kekikli_Ispanyol_Omleti.mp4", "poster_file": "yemek_videolari/posters/G04_Ogun1_Patatesli_Dag_Kekikli_Ispanyol_Omleti.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ed/uf-fuyZnwbbBIBKqBTCQ2_alligator.mp4"}, "meal2": {"name": "Knorr Ezogelin Çorbası + Bol Limonlu ve Maydanozlu Mercimek Köftesi", "prep": "15 dk", "cook": "20 dk", "zone": "Z09 1. Kat & Z04", "pantry": ["Çorba: 1 paket Knorr Ezogelin Çorbası (U030 - Z09 1. Kat)", "Köfte: 1 su bardağı Kırmızı Mercimek (U052) + 1.5 su bardağı İnce Bulgur (U051)", "Sos/Baharat: 1.5 yemek kaşığı Salça (U041), Kimyon (U027), İsot/Sumak (U020), Pul Biber (U009), yarım çay bardağı Sıvı Yağ (U032)"], "fresh": ["2 adet Kuru Soğan (ince kıyılmış) + yarım demet Maydanoz", "1.5 adet Limonun suyu + Ayran için 1 su bardağı Yoğurt"], "steps": ["Kırmızı mercimeği (U052) 3 su bardağı suyla tamamen dağılana kadar 15 dk haşla. Ocağı kapatıp ince bulguru (U051) ekle, kapağını kapatıp 15 dk şişmeye bırak.", "Tavada yarım çay bardağı yağda 2 soğanı pembeleştir, salçayı (U041) ve baharatları (U020, U027, U009) ekleyip 2 dk kavur.", "Soğanlı sosu şişen mercimek-bulgur harcına döküp 5 dk yoğur; ince kıyılmış maydanoz ve 1 limon suyunu ekleyip sıkarak şekil ver.", "Yanında 10 dakikada kaynayan Knorr Ezogelin Çorbası (U030) ve köpüklü ayranla servis et."], "video_id": "G04_Ogun2_Ezogelin_Corbasi_ve_Mercimek_Koftesi", "video_file": "yemek_videolari/G04_Ogun2_Ezogelin_Corbasi_ve_Mercimek_Koftesi.mp4", "poster_file": "yemek_videolari/posters/G04_Ogun2_Ezogelin_Corbasi_ve_Mercimek_Koftesi.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ed/4CAVVfVtEyqOome3elfp__alligator.mp4"}}, {"day": 5, "day_title": "CUMA — KÖRİ SOSLU TAVUK SOTE & YEŞİL MERCİMEKLİ MÜCEDDERE", "prep_alert": "GÜNLÜK NOT: 1. gün haşlayıp ayırdığın tavuk etlerinin ikinci porsiyonunu bugün Harras Köri (U016) ve yoğurt sosuyla birleştiriyoruz.", "meal1": {"name": "Domatesli Biberli Menemen + Mısır Unlu Krep + Portakal Çiçeği Balı", "prep": "8 dk", "cook": "12 dk", "zone": "Z04 & Z08", "pantry": ["Krep: Yarım bardak Un (U057) + yarım bardak Mısır Unu (U055) + Tuz", "Menemen: 3 yemek kaşığı Sıvı Yağ (U032) + Pul Biber (U009) + Kekik (U018)", "Tatlı Kapanış: J. Regal İspanyol Portakal Çiçeği Balı (U035 - Z08 Üst Raf)"], "fresh": ["Menemen: 2 adet Domates (rendelenmiş/küp), 2 adet Yeşil Biber, 3 adet Yumurta", "Krep: 1 adet Yumurta + 1 yemek kaşığı Yoğurt + 1 su bardağı su + 50 g Peynir"], "steps": ["Yumurta, yoğurt, su, un (U057) ve mısır ununu (U055) pürüzsüz çırpıp tavada ince krepler halinde arkalı önlü 2'şer dakika pişir.", "Tavada doğranmış biberleri yağda çevir, domatesleri ekleyip suyunu hafif çekene dek 5 dk pişir; 3 yumurtayı kırıp 2 dk karıştır.", "Krepleri önce peynir ve menemenle, son iki krebi ise İspanyol Portakal Çiçeği Balı (U035) ile rulo yaparak servis et."], "video_id": "G05_Ogun1_Menemen_ve_Balli_Misir_Unlu_Krep", "video_file": "yemek_videolari/G05_Ogun1_Menemen_ve_Balli_Misir_Unlu_Krep.mp4", "poster_file": "yemek_videolari/posters/G05_Ogun1_Menemen_ve_Balli_Misir_Unlu_Krep.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ee/FKboCZ-XfoAvu15EGcBD4_alligator.mp4"}, "meal2": {"name": "Harras Köri ve Yoğurt Soslu Tavuk Sote + Yeşil Mercimekli Bulgur Pilavı (Müceddere)", "prep": "10 dk", "cook": "22 dk", "zone": "Z04 Üst Raf", "pantry": ["Tavuk: 1.5 tatlı kaşığı Harras Köri (U016), 1 çay kaşığı Toz Zencefil (U013), 1 tatlı kaşığı Un (U057)", "Müceddere: Yarım su bardağı Yeşil Mercimek (U054) + 1 su bardağı Şaban Pilavlık Bulgur (U062)", "4 yemek kaşığı Sıvı Yağ (U032) + Kimyon (U027) + Karabiber (U026)"], "fresh": ["Tavuk: 1 kase Didiklenmiş/Doğranmış Tavuk But + 1 adet Patates (küp) + 2 yemek kaşığı Yoğurt + 1 diş Sarımsak", "Müceddere Üzeri: 2 adet büyük Kuru Soğan (piyazlık karamelize)"], "steps": ["Yeşil mercimeği (U054) 2 bardak suda 12 dk ön haşla; bulguru (U062) ve 1 bardak sıcak suyu ekleyip kısık ateşte 12 dk suyunu çektir.", "Ayrı tavada 2 piyazlık soğanı 3 kaşık yağda koyu altın rengi olana dek 8 dk karamelize edip pişen mercimekli bulgurun üzerine karıştır.", "Tavada küp patatesleri 5 dk sotele, tavuk parçalarını, sarımsağı, zencefili (U013) ve Harras Köriyi (U016) ekle.", "2 kaşık yoğurdu 1 tatlı kaşığı un ve yarım bardak sıcak suyla çırpıp tavaya dök; 4 dk sos koyulaşana dek fokurdatıp Müceddere yanında sun."], "video_id": "G05_Ogun2_Kori_Soslu_Tavuk_ve_Yesil_Mercimekli_Muceddere", "video_file": "yemek_videolari/G05_Ogun2_Kori_Soslu_Tavuk_ve_Yesil_Mercimekli_Muceddere.mp4", "poster_file": "yemek_videolari/posters/G05_Ogun2_Kori_Soslu_Tavuk_ve_Yesil_Mercimekli_Muceddere.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ed/YH1cxiCav_vvcyGWwstYm_alligator.mp4"}}, {"day": 6, "day_title": "CUMARTESİ — SICAK HUMUS ÜSTÜ YUMURTA & GÜVEÇTE FIRIN ERİŞTE", "prep_alert": "GÜNLÜK NOT: 2. gün haşlayıp ayırdığın nohutların yarısıyla rondo (U075) içinde ipeksi sıcak humus yapıyoruz. Akşam ise Z01'deki toprak güveç kaplarını kullanıyoruz.", "meal1": {"name": "Rondo Yapımı Kimyonlu Sıcak Humus Üzeri Sahanda Yumurta + Tava Bazlaması", "prep": "8 dk", "cook": "8 dk", "zone": "Z04 Alt/Üst Raf", "pantry": ["1.5 su bardağı Haşlanmış Nohut (U050 - ılık)", "1 tatlı kaşığı Kimyon (U027) + Kaya Tuzu (U017) + 4 yemek kaşığı Sıvı Yağ (U032)", "Üzeri: 1 tatlı kaşığı Tatlı Toz Biber (U006) + Sumak (U020)"], "fresh": ["2 diş Sarımsak + yarım Limonun suyu + 2 yemek kaşığı Yoğurt", "4 adet Sahanda Yumurta"], "steps": ["Ilık haşlanmış nohutları (U050), sarımsak, limon suyu, 2 kaşık yoğurt, kimyon (U027), 2 kaşık sıvı yağ ve 3 kaşık sıcak suyla Doğrayıcı Rondo (U075) haznesinde krema kıvamına gelene dek 2 dk çek.", "Humusu iki geniş tabağa yay ve ortasını kaşıkla havuz gibi aç.", "Tavada 2 kaşık yağ ve toz biberi (U006) kızdırıp 4 yumurtayı sarısı akışkan kalacak şekilde pişir; yağıyla birlikte humusun ortasına yerleştir."], "video_id": "G06_Ogun1_Rondo_Sicak_Humus_Ustu_Sahanda_Yumurta", "video_file": "yemek_videolari/G06_Ogun1_Rondo_Sicak_Humus_Ustu_Sahanda_Yumurta.mp4", "poster_file": "yemek_videolari/posters/G06_Ogun1_Rondo_Sicak_Humus_Ustu_Sahanda_Yumurta.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ee/pQq12REHFSJwa8j5vevuT_alligator.mp4"}, "meal2": {"name": "Piyale Kremalı Tavuk Çorbası + Toprak Güveçte Tavuk Suyu Çektirilmiş Erişte", "prep": "8 dk", "cook": "18 dk", "zone": "Z01 & Z09", "pantry": ["Çorba: 1 paket Piyale Kremalı Tavuk Çorbası (U029 - Z09 1. Kat)", "Ana Yemek: 1 paket Filiz Yumurtalı Uzun Erişte (U074) veya Anadolu Yüksük Makarna (U070 - Z09 Mor Kutu)", "3 yemek kaşığı Sıvı Yağ (U032) + 1 tatlı kaşığı Kuru Nane/Kekik (U018)", "Ekipman: Ocak Üstü Dolaptaki Toprak Güveç Kapları (Z01)"], "fresh": ["2 su bardağı Sıcak Tavuk Suyu + 1 su bardağı sıcak su", "Üzeri İçin: 100 g Lor / Beyaz Peynir + 2 yemek kaşığı Yoğurt"], "steps": ["Piyale Kremalı Tavuk Çorbasını (U029) 5 su bardağı suyla karıştırarak 10 dk pişir.", "Tencerede 3 kaşık yağda uzun eriştenin (U074) yarısını hafif pembeleşene dek 3 dk kavur, kalan yarısını çiğ ekle.", "Üzerine 2 bardak tavuk suyu ve 1 bardak sıcak su döküp suyunu çekene kadar 9 dk demlendir.", "Pişen erişteyi toprak güveç kaplarına (Z01) paylaştır, üzerine peynir, yoğurt ve nane (U018) serpip sıcak servis et."], "video_id": "G06_Ogun2_Kremali_Tavuk_Corbasi_ve_Guvecte_Eriste", "video_file": "yemek_videolari/G06_Ogun2_Kremali_Tavuk_Corbasi_ve_Guvecte_Eriste.mp4", "poster_file": "yemek_videolari/posters/G06_Ogun2_Kremali_Tavuk_Corbasi_ve_Guvecte_Eriste.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ee/thgTONsV2Y0pTQElDVOzt_alligator.mp4"}}, {"day": 7, "day_title": "PAZAR — TAVUKLU NOHUT YEMEĞİ, ŞEHRİYE ÇORBASI & HELVA FİNALİ", "prep_alert": "HAFTA FİNALİ: Kalan son tavuk parçaları, haşlanmış nohutlar ve tavuk suyuyla haftayı ziyafet sofrasıyla kapatıyoruz.", "meal1": {"name": "Mısır Gevreği & Yoğurt Kasesi + Patatesli Tava Gözlemesi + Kekik Balı", "prep": "10 dk", "cook": "12 dk", "zone": "Z08 & Z04", "pantry": ["1.5 su bardağı Mısır Gevreği (U068 - Z08 Üst Raf)", "Gözleme: 1 su bardağı Un (U057) + Tuz + 2 yemek kaşığı Sıvı Yağ (U032)", "Yanında: J. Regal İspanyol Kekik Balı (U034 - Z08 Üst Raf)"], "fresh": ["1 adet haşlanmış/ezilmiş Patates + kalan Peynir (gözleme içi)", "1 su bardağı Yoğurt + 3 adet Haşlanmış/Omlet Yumurta"], "steps": ["Un (U057), tuz ve suyla yumuşak hamur yoğurup 2 büyük yufka aç; içine baharatlı ezilmiş patates ve peynir koyup yarım ay şeklinde kapat.", "Tavada iki yüzünü hafif yağlayarak 3'er dakika çıtır gözleme olarak pişir.", "Yanında yoğurtlu mısır gevreği kasesi (U068), yumurta ve İspanyol Kekik Balı (U034) ile Pazar kahvaltısını kur."], "video_id": "G07_Ogun1_Patatesli_Tava_Gozlemesi_ve_Misir_Gevregi", "video_file": "yemek_videolari/G07_Ogun1_Patatesli_Tava_Gozlemesi_ve_Misir_Gevregi.mp4", "poster_file": "yemek_videolari/posters/G07_Ogun1_Patatesli_Tava_Gozlemesi_ve_Misir_Gevregi.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ef/Gj5D8xRhYnMSr6C6Dab5B_alligator.mp4"}, "meal2": {"name": "Tavuk Suyuna Yıldız Şehriye Çorbası + Tavuklu Nohut Yemeği + Bal Şerbetli Helva", "prep": "10 dk", "cook": "25 dk", "zone": "Z09 & Z04", "pantry": ["Çorba: Yarım su bardağı Filiz Yıldız Şehriye (U071 - Z09 Mor Kutu) + Kuru Nane (U018)", "Ana Yemek: Kalan Haşlanmış Nohut (U050) + Salça (U041) + Kimyon (U027) + 1 kase Ev Eriştesi Pilavı (U066)", "Tatlı: Yarım su bardağı İnce Bulgur/İrmik (U051) + yarım bardak Un (U057) + 3 yemek kaşığı Süzme Bal/Şerbet (U033) + Tarçın (U005)"], "fresh": ["Çorba & Nohut: Kalan Tavuk Suyu + son kase Tavuk But Eti + 1 adet Kuru Soğan + yarım Limon"], "steps": ["Kaynayan tavuk suyuna yıldız şehriyeyi (U071) atıp 8 dk pişir, üzerine nane ve limon sık.", "Tencerede soğan ve salçayı (U041) kavurup haşlanmış nohut (U050), tavuk parçaları ve sıcak suyla 15 dk özleştir; yanında kavrulmuş erişte pilavı (U066) demle.", "Tatlı için tavada 3 kaşık yağda un (U057) ve irmiği (U051) kokusu çıkana dek 7 dk kavur; 1 bardak ılık suda eritilmiş süzme balı (U033) döküp çektir, tarçınla (U005) sun."], "video_id": "G07_Ogun2_Tavuklu_Nohut_Yemegi_Sehriye_Corbasi_ve_Helva", "video_file": "yemek_videolari/G07_Ogun2_Tavuklu_Nohut_Yemegi_Sehriye_Corbasi_ve_Helva.mp4", "poster_file": "yemek_videolari/posters/G07_Ogun2_Tavuklu_Nohut_Yemegi_Sehriye_Corbasi_ve_Helva.jpg", "video_url": "https://v3b.fal.media/files/b/0aafb2ef/EkpTJ-solGdMX4xMDcyeZ_alligator.mp4"}}], "market": [{"id": "M01", "name": "30'lu Koli Yumurta (L Boy)", "qty": "1 Koli (30 Adet)", "price": 145, "usage": "7 gün kahvaltı, omlet, menemen, çılbır ve terbiyeler"}, {"id": "M02", "name": "Bütün Poşet Piliç / Kalçalı But", "qty": "1.2 kg", "price": 115, "usage": "3 ana yemek + 2 litre doğal tavuk suyu"}, {"id": "M03", "name": "Tam Yağlı Yoğurt", "qty": "1.5 kg Kova", "price": 75, "usage": "Erişte mantısı, çılbır, mercimek çorbası terbiyesi"}, {"id": "M04", "name": "Taze Kaşar veya Beyaz Peynir", "qty": "250 g", "price": 65, "usage": "Kuymak ekmeği, omlet ve gözleme"}, {"id": "M05", "name": "Kuru Soğan", "qty": "1.5 kg", "price": 22, "usage": "Tüm ana yemeklerin ve çorbaların aromatik bazı"}, {"id": "M06", "name": "Patates", "qty": "1.5 kg", "price": 23, "usage": "İspanyol tortilla, patatesli gözleme ve çorba kıvamı"}, {"id": "M07", "name": "Domates & Sivri Biber", "qty": "1 kg Karışık", "price": 30, "usage": "Menemen, mercimek köftesi ve güveç sosu"}, {"id": "M08", "name": "Sarımsak & Limon", "qty": "2 Baş + 3 Adet", "price": 15, "usage": "Humus, mantı sosu, çorba ve salata"}, {"id": "M09", "name": "Maydanoz & Taze Yeşillik", "qty": "1 İri Demet", "price": 10, "usage": "Mercimek köftesi, müceddere ve sunum"}], "zones": [{"code": "Z01", "name": "Buzdolabı Üstü", "sub": "Stand Mikser & Airfryer", "items": ["U005 Gümüş Stand Mikser", "U006 Philips Airfryer"]}, {"code": "Z02", "name": "Fırın & Ocak Üstü", "sub": "Davlumbaz & Sıcak Pişirme", "items": ["Ankastre Ocak", "Ankastre Fırın"]}, {"code": "Z03", "name": "Sol Üst Dolap", "sub": "Bardak, Kupa & Günlük Kase", "items": ["U004 Cam Kavanozlar", "U020 Kupa Seti", "U083 Kaseler"]}, {"code": "Z04", "name": "Tezgah Üstü Orta Dolap", "sub": "Kuru Bakliyat, Un, Yağ & Kahvaltı", "items": ["U050 Nohut", "U052 Kırmızı Mercimek", "U055 Mısır Unu", "U057 Buğday Unu", "U065 Kesme Erişte"]}, {"code": "Z05", "name": "Tezgah & Evye Hattı", "sub": "Kettle, Bıçak & Günlük Hazırlık", "items": ["U001 Çelik Kettle", "U031 Kesme Tahtaları", "U036 Bıçak Seti"]}, {"code": "Z06", "name": "Evye Altı Dolap", "sub": "Temizlik & Bulaşık Malzemeleri", "items": ["U040 Deterjan Stoku", "U079 Çöp Poşetleri"]}, {"code": "Z07", "name": "Tekerlekli Dolap Üstü", "sub": "Aktif Baharat & Bitki Çayı İstasyonu", "items": ["U003 Bitki Çayları", "U015 Kekik", "U017 Kaya Tuzu", "U027 Kimyon", "U029 Köri"]}, {"code": "Z08", "name": "Tekerlekli Dolap İçi", "sub": "Üst: Günlük Tava · Alt: Yedek Stok", "items": ["U002 Granit Tava", "U033 Çelik Tencere", "U070 Yedek Bakliyat Stoku"]}, {"code": "Z09", "name": "Giriş Sol 5 Katlı Dolap", "sub": "Kat 1–5 Dikey Kiler & Kalıplar", "items": ["Kat 1: İçecek", "Kat 2: Rondo & Blender", "Kat 3: Kahve & Atıştırmalık", "Kat 4: Kek Kalıbı (U078)", "Kat 5: Güveç & Tepsi"]}], "inventory": [{"code": "U001", "name": "Çelik Su Isıtıcı (Kettle)", "zone": "Z05", "cat": "Cihaz", "img": "urun_fotograflari/U001.jpg"}, {"code": "U002", "name": "Siyah Granit Tava", "zone": "Z08", "cat": "Tencere & Tava", "img": "urun_fotograflari/U002.jpg"}, {"code": "U003", "name": "Bitki Çayı & Kahve Kavanozları", "zone": "Z07", "cat": "Çay & Kahve", "img": "urun_fotograflari/U003.jpg"}, {"code": "U004", "name": "Boş Cam Kavanoz Seti", "zone": "Z03", "cat": "Saklama", "img": "urun_fotograflari/U004.jpg"}, {"code": "U005", "name": "Gümüş Stand Mikser", "zone": "Z01", "cat": "Cihaz", "img": "urun_fotograflari/U005.jpg"}, {"code": "U006", "name": "Philips Airfryer", "zone": "Z01", "cat": "Cihaz", "img": "urun_fotograflari/U006.jpg"}, {"code": "U007", "name": "Filtre Kahve Makinesi", "zone": "Z09", "cat": "Cihaz", "img": "urun_fotograflari/U007.jpg"}, {"code": "U008", "name": "Kahve & Termos Ekipmanları", "zone": "Z09", "cat": "Çay & Kahve", "img": "urun_fotograflari/U008.jpg"}, {"code": "U009", "name": "Büyük Cam Saklama Kavanozu", "zone": "Z03", "cat": "Saklama", "img": "urun_fotograflari/U009.jpg"}, {"code": "U010", "name": "Cips & Atıştırmalık Paketi", "zone": "Z09", "cat": "Atıştırmalık", "img": "urun_fotograflari/U010.jpg"}, {"code": "U011", "name": "Kuru Meyve & Kuruyemiş", "zone": "Z09", "cat": "Atıştırmalık", "img": "urun_fotograflari/U011.jpg"}, {"code": "U012", "name": "Harras Karbonat & Kabartma Tozu", "zone": "Z04", "cat": "Un & Pişirme", "img": "urun_fotograflari/U012.jpg"}, {"code": "U013", "name": "Kakao & Çikolata Tozu", "zone": "Z04", "cat": "Un & Pişirme", "img": "urun_fotograflari/U013.jpg"}, {"code": "U014", "name": "Kuru Bakliyat Kavanozu", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U014.jpg"}, {"code": "U015", "name": "Kuru Dağ Kekiği", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U015.jpg"}, {"code": "U016", "name": "Kırmızı Pul Biber", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U016.jpg"}, {"code": "U017", "name": "Kaya Tuzu & Tuzluk", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U017.jpg"}, {"code": "U018", "name": "Karabiber & Baharat Değirmeni", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U018.jpg"}, {"code": "U019", "name": "Mutfak Yardımcı Gereçleri", "zone": "Z05", "cat": "Ekipman", "img": "urun_fotograflari/U019.jpg"}, {"code": "U020", "name": "Seramik Kupa & Bardak Seti", "zone": "Z03", "cat": "Sofra", "img": "urun_fotograflari/U020.jpg"}, {"code": "U021", "name": "Bitki Çayı Kutuları", "zone": "Z07", "cat": "Çay & Kahve", "img": "urun_fotograflari/U021.jpg"}, {"code": "U022", "name": "Türk Kahvesi & Filtre Kahve", "zone": "Z07", "cat": "Çay & Kahve", "img": "urun_fotograflari/U022.jpg"}, {"code": "U023", "name": "Siyah Çay Stoku", "zone": "Z04", "cat": "Çay & Kahve", "img": "urun_fotograflari/U023.jpg"}, {"code": "U024", "name": "Büyük Boy Çaydanlık", "zone": "Z02", "cat": "Tencere & Tava", "img": "urun_fotograflari/U024.jpg"}, {"code": "U025", "name": "Kuru Nane", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U025.jpg"}, {"code": "U026", "name": "Sumak & İsot", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U026.jpg"}, {"code": "U027", "name": "Kimyon", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U027.jpg"}, {"code": "U028", "name": "Tarçın", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U028.jpg"}, {"code": "U029", "name": "Köri & Zerdeçal", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U029.jpg"}, {"code": "U030", "name": "Susam & Çörekotu", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U030.jpg"}, {"code": "U031", "name": "Ahşap & Plastik Kesme Tahtaları", "zone": "Z05", "cat": "Ekipman", "img": "urun_fotograflari/U031.jpg"}, {"code": "U032", "name": "Süzgeç & Karıştırma Kabı", "zone": "Z05", "cat": "Ekipman", "img": "urun_fotograflari/U032.jpg"}, {"code": "U033", "name": "Çelik Derin Tencere Seti", "zone": "Z08", "cat": "Tencere & Tava", "img": "urun_fotograflari/U033.jpg"}, {"code": "U034", "name": "Sos Tenceresi & Cezve", "zone": "Z08", "cat": "Tencere & Tava", "img": "urun_fotograflari/U034.jpg"}, {"code": "U035", "name": "Fırın Eldiveni & Nihale", "zone": "Z05", "cat": "Ekipman", "img": "urun_fotograflari/U035.jpg"}, {"code": "U036", "name": "Şef Bıçağı & Soyacak Seti", "zone": "Z05", "cat": "Ekipman", "img": "urun_fotograflari/U036.jpg"}, {"code": "U037", "name": "Kepçe, Spatula & Çırpıcı", "zone": "Z05", "cat": "Ekipman", "img": "urun_fotograflari/U037.jpg"}, {"code": "U038", "name": "Saklama Kapları", "zone": "Z03", "cat": "Saklama", "img": "urun_fotograflari/U038.jpg"}, {"code": "U039", "name": "Buzdolabı Düzenleyiciler", "zone": "Z03", "cat": "Saklama", "img": "urun_fotograflari/U039.jpg"}, {"code": "U040", "name": "Bulaşık Deterjanı & Sünger", "zone": "Z06", "cat": "Temizlik", "img": "urun_fotograflari/U040.jpg"}, {"code": "U041", "name": "Yüzey Temizleyici", "zone": "Z06", "cat": "Temizlik", "img": "urun_fotograflari/U041.jpg"}, {"code": "U042", "name": "El Blenderı (Çubuk Blender)", "zone": "Z09", "cat": "Cihaz", "img": "urun_fotograflari/U042.jpg"}, {"code": "U043", "name": "Mutfak Rondosu (Doğrayıcı)", "zone": "Z09", "cat": "Cihaz", "img": "urun_fotograflari/U043.jpg"}, {"code": "U044", "name": "Tost / Waffle Plakaları", "zone": "Z09", "cat": "Cihaz", "img": "urun_fotograflari/U044.jpg"}, {"code": "U045", "name": "Mısır Gevreği (Cornflakes)", "zone": "Z04", "cat": "Kahvaltı", "img": "urun_fotograflari/U045.jpg"}, {"code": "U046", "name": "Yulaf Ezmesi (Oats)", "zone": "Z04", "cat": "Kahvaltı", "img": "urun_fotograflari/U046.jpg"}, {"code": "U047", "name": "Süzme Çiçek Balı", "zone": "Z04", "cat": "Kahvaltı", "img": "urun_fotograflari/U047.jpg"}, {"code": "U048", "name": "Tahin & Pekmez / Helva Bazı", "zone": "Z04", "cat": "Kahvaltı", "img": "urun_fotograflari/U048.jpg"}, {"code": "U049", "name": "Reçel & Kakaolu Fındık Kreması", "zone": "Z04", "cat": "Kahvaltı", "img": "urun_fotograflari/U049.jpg"}, {"code": "U050", "name": "Kuru Nohut", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U050.jpg"}, {"code": "U051", "name": "Yeşil Mercimek", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U051.jpg"}, {"code": "U052", "name": "Kırmızı Mercimek", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U052.jpg"}, {"code": "U053", "name": "Kuru Fasulye", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U053.jpg"}, {"code": "U054", "name": "Pilavlık & Köftelik Bulgur", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U054.jpg"}, {"code": "U055", "name": "Piyale Mısır Unu", "zone": "Z04", "cat": "Un & Pişirme", "img": "urun_fotograflari/U055.jpg"}, {"code": "U056", "name": "Pirinç Unu & Nişasta", "zone": "Z04", "cat": "Un & Pişirme", "img": "urun_fotograflari/U056.jpg"}, {"code": "U057", "name": "Çok Amaçlı Buğday Unu", "zone": "Z04", "cat": "Un & Pişirme", "img": "urun_fotograflari/U057.jpg"}, {"code": "U058", "name": "Ayçiçek Yağı", "zone": "Z04", "cat": "Yağ & Sos", "img": "urun_fotograflari/U058.jpg"}, {"code": "U059", "name": "Sızma Zeytinyağı", "zone": "Z04", "cat": "Yağ & Sos", "img": "urun_fotograflari/U059.jpg"}, {"code": "U060", "name": "Domates & Biber Salçası", "zone": "Z04", "cat": "Yağ & Sos", "img": "urun_fotograflari/U060.jpg"}, {"code": "U061", "name": "Elma & Üzüm Sirkesi", "zone": "Z04", "cat": "Yağ & Sos", "img": "urun_fotograflari/U061.jpg"}, {"code": "U062", "name": "Nar Ekşisi & Limon Sosu", "zone": "Z04", "cat": "Yağ & Sos", "img": "urun_fotograflari/U062.jpg"}, {"code": "U063", "name": "Basmati Pirinç", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U063.jpg"}, {"code": "U064", "name": "Baldo Pirinç", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U064.jpg"}, {"code": "U065", "name": "Ev Yapımı Kesme Erişte", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U065.jpg"}, {"code": "U066", "name": "Tel & Arpa Şehriye", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U066.jpg"}, {"code": "U067", "name": "Makarna Paketleri", "zone": "Z04", "cat": "Bakliyat", "img": "urun_fotograflari/U067.jpg"}, {"code": "U068", "name": "Özbek Pilavı Baharat Harcı", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U068.jpg"}, {"code": "U069", "name": "Tavuk & Et Bulyon / Çeşni", "zone": "Z07", "cat": "Baharat", "img": "urun_fotograflari/U069.jpg"}, {"code": "U070", "name": "Yedek Kuru Gıda Stoku", "zone": "Z08", "cat": "Bakliyat", "img": "urun_fotograflari/U070.jpg"}, {"code": "U071", "name": "Kuru Soğan & Sarımsak Sepeti", "zone": "Z08", "cat": "Sebze", "img": "urun_fotograflari/U071.jpg"}, {"code": "U072", "name": "6'lı Toprak Güveç Kaseleri", "zone": "Z09", "cat": "Fırın & Kalıp", "img": "urun_fotograflari/U072.jpg"}, {"code": "U073", "name": "Borcam Fırın Tepsisi", "zone": "Z09", "cat": "Fırın & Kalıp", "img": "urun_fotograflari/U073.jpg"}, {"code": "U074", "name": "Yuvarlak Kelepçeli Kek Kalıbı", "zone": "Z09", "cat": "Fırın & Kalıp", "img": "urun_fotograflari/U074.jpg"}, {"code": "U075", "name": "Muffin & Tart Kalıpları", "zone": "Z09", "cat": "Fırın & Kalıp", "img": "urun_fotograflari/U075.jpg"}, {"code": "U076", "name": "Alüminyum Folyo & Pişirme Kağıdı", "zone": "Z05", "cat": "Ekipman", "img": "urun_fotograflari/U076.jpg"}, {"code": "U077", "name": "Buzdolabı Poşeti & Streç Film", "zone": "Z05", "cat": "Ekipman", "img": "urun_fotograflari/U077.jpg"}, {"code": "U078", "name": "Siyah Baton Kek Kalıbı (İçinde Kavanoz Kapağı)", "zone": "Z09", "cat": "Fırın & Kalıp", "img": "urun_fotograflari/U078.jpg"}, {"code": "U079", "name": "Temizlik Bezleri & Çöp Poşeti", "zone": "Z06", "cat": "Temizlik", "img": "urun_fotograflari/U079.jpg"}, {"code": "U080", "name": "19L Damacana & Su Pompası", "zone": "Z09", "cat": "İçecek", "img": "urun_fotograflari/U080.jpg"}, {"code": "U081", "name": "Maden Suyu & İçecek Şişeleri", "zone": "Z09", "cat": "İçecek", "img": "urun_fotograflari/U081.jpg"}, {"code": "U082", "name": "Düz Servis Tabakları", "zone": "Z03", "cat": "Sofra", "img": "urun_fotograflari/U082.jpg"}, {"code": "U083", "name": "Derin Çorba & Yulaf Kaseleri", "zone": "Z03", "cat": "Sofra", "img": "urun_fotograflari/U083.jpg"}, {"code": "U084", "name": "Çatal, Kaşık & Bıçak Takımı", "zone": "Z05", "cat": "Sofra", "img": "urun_fotograflari/U084.jpg"}]};
+const STORAGE_KEY = "sisli_mutfak_clean_v1";
+
+let state = {
+  activeDay: 1,
+  utilityTab: "market",
+  pantryQuery: "",
+  pantryZone: "ALL",
+  doneMeals: {},
+  doneSteps: {},
+  doneIngs: {},
+  boughtMarket: {},
+  doneZones: {}
+};
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) state = Object.assign(state, JSON.parse(raw));
+  } catch (e) {}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {}
+  updateTopStats();
+}
+
+function updateTopStats() {
+  const mealCount = Object.values(state.doneMeals).filter(Boolean).length;
+  document.getElementById("topMealStat").textContent = `${mealCount}/14`;
+  let spent = 0;
+  DATA.market.forEach(m => {
+    if (state.boughtMarket[m.id]) spent += m.price;
+  });
+  document.getElementById("topBudgetStat").textContent = `${spent} / 500 TL`;
+}
+
+function cleanDayName(rawTitle) {
+  const parts = rawTitle.split("—");
+  const dayWord = parts[0].trim();
+  return dayWord.charAt(0) + dayWord.slice(1).toLocaleLowerCase('tr-TR');
+}
+
+function renderDayChips() {
+  const row = document.getElementById("dayChipRow");
+  row.innerHTML = DATA.days.map(d => {
+    const m1 = !!state.doneMeals[`d${d.day}_m1`];
+    const m2 = !!state.doneMeals[`d${d.day}_m2`];
+    const isDone = m1 && m2;
+    const isSel = state.activeDay === d.day;
+    return `
+      <button class="comp-configurator-chip ${isSel ? 'selected' : ''} ${isDone ? 'done' : ''}"
+              onclick="selectDay(${d.day})">
+        <span class="chip-dot"></span>
+        <span>Gün 0${d.day} · ${cleanDayName(d.day_title)}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function renderMealTile(d, mealKey, mealObj, isDark) {
+  const mId = `d${d.day}_${mealKey}`;
+  const isDone = !!state.doneMeals[mId];
+  const tileClass = isDark ? "comp-product-tile-dark" : "comp-product-tile-parchment";
+  const anchorId = isDark ? "ogun-2" : "ogun-1";
+  const labelPrefix = isDark ? "2. ÖĞÜN · AKŞAM YEMEĞİ" : "1. ÖĞÜN · GEÇ KAHVALTI / BRUNCH";
+  const secTextColor = isDark ? "var(--text-on-dark-secondary)" : "var(--text-secondary)";
+
+  const minsMatch = (mealObj.cook || "15 dk").match(/(\d+)/);
+  const cookMins = minsMatch ? parseInt(minsMatch[1], 10) : 15;
+
+  const ings = [...(mealObj.pantry || []), ...(mealObj.fresh || [])];
+  const ingsHtml = ings.map((item, idx) => {
+    const k = `${mId}_i${idx}`;
+    const c = !!state.doneIngs[k];
+    return `
+      <label class="ing-item ${c ? 'checked' : ''}">
+        <input type="checkbox" ${c ? 'checked' : ''} onchange="toggleIng('${k}')">
+        <span>${item}</span>
+      </label>
+    `;
+  }).join("");
+
+  const stepsHtml = (mealObj.steps || []).map((st, idx) => {
+    const k = `${mId}_s${idx}`;
+    const c = !!state.doneSteps[k];
+    return `
+      <div class="step-item ${c ? 'done' : ''}" onclick="toggleStep('${k}')">
+        <span class="step-index">0${idx + 1}</span>
+        <span>${st}</span>
+      </div>
+    `;
+  }).join("");
+
+  const prepBanner = isDark && d.prep_alert ? `
+    <div class="prep-strip">
+      <strong>Akşam Ön Hazırlık:</strong> ${d.prep_alert.replace(/^AKŞAM ÖN HAZIRLIK:\s*/i, '')}
+    </div>
+  ` : "";
+
+  return `
+    <section class="${tileClass}" id="${anchorId}">
+      <div class="tile-container">
+        <div class="tile-header-centered">
+          <span class="tile-eyebrow">GÜN 0${d.day} · ${labelPrefix}</span>
+          <h2 class="typo-display-lg">${mealObj.name}</h2>
+          <p class="typo-body" style="color:${secTextColor}; margin-top:10px;">
+            Hazırlık: ${mealObj.prep} · Pişirme: ${mealObj.cook} · Konum: ${mealObj.zone}
+          </p>
+          <div class="cta-cluster">
+            <button class="comp-button-primary" onclick="toggleMeal('${mId}')">
+              ${isDone ? '✓ Öğün Tamamlandı' : 'Öğünü Tamamla'}
+            </button>
+            <button class="comp-button-secondary-pill" onclick="startTimer(${cookMins}, '${mealObj.name.replace(/'/g, "")}')">
+              ${cookMins} dk Sayaç
+            </button>
+          </div>
+        </div>
+
+        <div class="meal-video-stage">
+          <video controls playsinline preload="none" poster="${mealObj.poster_file}" src="${mealObj.video_file}"></video>
+        </div>
+
+        <div class="meal-spec-grid">
+          <div>
+            <div class="spec-col-title">Malzemeler (${ings.length})</div>
+            ${ingsHtml}
+          </div>
+          <div>
+            <div class="spec-col-title">Pişirme Adımları</div>
+            ${stepsHtml}
+          </div>
+        </div>
+
+        ${prepBanner}
+      </div>
+    </section>
+  `;
+}
+
+function renderActiveDay() {
+  const d = DATA.days.find(x => x.day === state.activeDay) || DATA.days[0];
+  const root = document.getElementById("dayMealsRoot");
+  root.innerHTML = renderMealTile(d, "m1", d.meal1, false) + renderMealTile(d, "m2", d.meal2, true);
+}
+
+function setUtilityTab(tab) {
+  state.utilityTab = tab;
+  ["market", "zones", "pantry"].forEach(t => {
+    const btn = document.getElementById(`tabBtn-${t}`);
+    if (btn) btn.classList.toggle("selected", t === tab);
+  });
+  renderUtilityPanel();
+}
+
+function renderUtilityPanel() {
+  const root = document.getElementById("utilityPanelRoot");
+  if (state.utilityTab === "market") {
+    root.innerHTML = `
+      <div class="market-list">
+        ${DATA.market.map(m => {
+          const b = !!state.boughtMarket[m.id];
+          return `
+            <div class="market-row ${b ? 'bought' : ''}" onclick="toggleMarket('${m.id}')">
+              <div class="market-left">
+                <input type="checkbox" ${b ? 'checked' : ''} onclick="event.stopPropagation(); toggleMarket('${m.id}')">
+                <div>
+                  <div class="market-title">${m.name} · ${m.qty}</div>
+                  <div class="market-sub">${m.usage}</div>
+                </div>
+              </div>
+              <div class="market-price">${m.price} TL</div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    `;
+  } else if (state.utilityTab === "zones") {
+    root.innerHTML = `
+      <div class="zone-grid">
+        ${DATA.zones.map(z => `
+          <div class="zone-tile" onclick="filterPantryByZone('${z.code}')">
+            <img src="mutfak_bolgeleri/${z.code}.jpg" alt="${z.name}" loading="lazy">
+            <div class="zone-tile-body">
+              <div class="typo-card-title">${z.code} · ${z.name}</div>
+              <div class="typo-caption" style="color:var(--text-secondary); margin-top:4px;">${z.sub}</div>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  } else {
+    const filtered = DATA.inventory.filter(item => {
+      const matchZone = state.pantryZone === "ALL" || item.zone === state.pantryZone;
+      const q = state.pantryQuery.trim().toLowerCase();
+      const matchQ = !q || item.name.toLowerCase().includes(q) || item.code.toLowerCase().includes(q);
+      return matchZone && matchQ;
+    });
+    root.innerHTML = `
+      <div class="pantry-toolbar">
+        <input class="apple-search" type="search" placeholder="Ürün veya kod ara (U055, Mısır Unu...)"
+               value="${state.pantryQuery}" oninput="updatePantrySearch(this.value)">
+        ${state.pantryZone !== "ALL" ? `<button class="comp-configurator-chip" onclick="filterPantryByZone('ALL')">Filtreyi Temizle (${state.pantryZone})</button>` : ''}
+      </div>
+      <div class="pantry-grid">
+        ${filtered.map(item => `
+          <div class="pantry-item">
+            <img src="${item.img}" alt="${item.name}" loading="lazy">
+            <div>
+              <div class="typo-caption" style="color:var(--accent-primary); font-weight:600;">${item.code} · ${item.zone}</div>
+              <div class="typo-card-title">${item.name}</div>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+}
+
+function selectDay(dayNum) {
+  state.activeDay = dayNum;
+  saveState();
+  renderDayChips();
+  renderActiveDay();
+}
+
+function toggleMeal(mId) {
+  state.doneMeals[mId] = !state.doneMeals[mId];
+  saveState();
+  renderDayChips();
+  renderActiveDay();
+}
+
+function toggleIng(k) {
+  state.doneIngs[k] = !state.doneIngs[k];
+  saveState();
+  renderActiveDay();
+}
+
+function toggleStep(k) {
+  state.doneSteps[k] = !state.doneSteps[k];
+  saveState();
+  renderActiveDay();
+}
+
+function toggleMarket(id) {
+  state.boughtMarket[id] = !state.boughtMarket[id];
+  saveState();
+  renderUtilityPanel();
+}
+
+function filterPantryByZone(zoneCode) {
+  state.pantryZone = zoneCode;
+  setUtilityTab("pantry");
+}
+
+function updatePantrySearch(val) {
+  state.pantryQuery = val;
+  renderUtilityPanel();
+}
+
+let timerInterval = null;
+function startTimer(mins, label) {
+  if (timerInterval) clearInterval(timerInterval);
+  let remaining = mins * 60;
+  const el = document.getElementById("timerDisplay");
+  function tick() {
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    el.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      el.textContent = "Süre Doldu";
+    }
+    remaining--;
+  }
+  tick();
+  timerInterval = setInterval(tick, 1000);
+}
+
+function resetAllProgress() {
+  if (!confirm("Tüm haftalık ilerleme sıfırlansın mı?")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+loadState();
+renderDayChips();
+renderActiveDay();
+renderUtilityPanel();
+updateTopStats();
+</script>
+</body>
+</html>
